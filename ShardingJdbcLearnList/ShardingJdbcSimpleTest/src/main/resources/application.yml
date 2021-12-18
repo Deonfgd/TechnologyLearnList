@@ -1,0 +1,56 @@
+## view: https://shardingsphere.apache.org/document/legacy/4.x/document/cn/manual/sharding-jdbc/configuration/config-spring-boot/
+spring:
+  #  datasource:
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    url: jdbc:mysql://localhost:3306/learning
+  #    username: root
+  #    password: fangroot
+
+  ## auto configuration: SpringBootConfiguration
+  shardingsphere:
+    ## 数据源
+    datasource:
+      #[ds1,...]
+      names: ds0
+
+      ## 数据源信息
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/learning?ServerTimezone=GTM%2B8
+        username: root
+        password: fangroot
+      # 其他数据源配置
+      # ds1: ...
+
+    # 分库分表策略
+    sharding:
+      ## 具体表
+      tables:
+        # 逻辑表名（SQL中写的表名是逻辑表名）
+        t_sharding_jdbc_goods:
+          ## 由数据源和表组合而成 ds$->{0..0}
+          actualDataNodes: ds${0..0}.t_sharding_jdbc_goods_${1..2}
+
+          #          database-stratey:
+
+          ## 分表策略
+          tableStrategy:
+            ## view: org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration
+            ## 各个策略的取值参考该类下子（strategy）下的配置类
+            ## org.apache.shardingsphere.api.sharding.standard
+            standard:
+              shardingColumn: goods_id
+              preciseAlgorithmClassName: com.fgd.shardingjdbc.service.impl.GoodsServiceImpl
+              rangeAlgorithmClassName: com.fgd.shardingjdbc.service.impl.OrdersServiceImpl
+
+    props:
+      sql:
+        show: true
+
+  ## 原因未知，若不配置可能出现bean名称重复错误
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8090
