@@ -1,0 +1,9 @@
+seata:
+  application-id: Test_Seata_Fgd
+
+spring:
+  datasource:
+    username: root
+    password: fangroot
+    url: jdbc:mysql://localhost:3306/spring_tx?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
