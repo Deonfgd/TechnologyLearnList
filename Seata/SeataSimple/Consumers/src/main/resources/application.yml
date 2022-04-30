@@ -1,0 +1,17 @@
+server:
+  port: 10001
+
+## TIPS: tx-service-group 一定要server，client都要保持一致
+spring:
+  application:
+    name: fgd_seata_consumer_app
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: fgd_seata_test
+
+  datasource:
+    password: fangroot
+    url: jdbc:mysql://localhost:3306/d_learn_dis_trans?ServerTimezone=GTM%2B8
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
