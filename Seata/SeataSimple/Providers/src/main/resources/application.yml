@@ -11,7 +11,8 @@ spring:
         tx-service-group: fgd_seata_test_
 
   datasource:
-    password: fangroot
-    url: jdbc:mysql://localhost:3306/d_learn_dis_trans?ServerTimezone=GTM%2B8
-    username: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    ds0:
+      password: fangroot
+      url: jdbc:mysql://localhost:3306/d_learn_dis_trans?ServerTimezone=GTM%2B8
+      username: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
